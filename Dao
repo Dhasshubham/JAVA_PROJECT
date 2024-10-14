@@ -1,0 +1,67 @@
+package com.tka.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.tka.Player.Player;
+import com.tka.service.IPLService;
+
+public class IPLDao {
+	String path = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://localhost:3306/iplplayers";
+	String uname = "root";
+	String pwd = "Shub";
+	
+	String sql = "SELECT*FROM players";
+	private List<Player> allplayerlist =null;
+	public List<Player> getAllPlayers() throws SQLException{
+		System.out.println("we are in IPLDao");
+		
+	try {
+		Class.forName(path);
+		System.out.println("Diver class loaded successfully"+1);
+		
+	   Connection conn = DriverManager.getConnection(url, uname, pwd);
+	    System.out.println("Connection established with mysql db"+2);
+	    
+	    Statement st = conn.createStatement();
+	    System.out.println(3);
+	    
+	    ResultSet rs = st.executeQuery(sql);
+	    System.out.println(4);
+	    allplayerlist = new ArrayList<Player>();
+	    
+	    
+	    while(rs.next ()) {
+	    	int jn = rs.getInt("jn");
+	    	String name = rs.getString("name");
+	    	int runs = rs.getInt("runs");
+	    	int wickets = rs.getInt("wickets");
+	    	String tname = rs.getString("tname");
+	    	
+//	    	System.out.println("jn = "+ jn +" name = "+ name + " runs ="+ name+ " wickets =" +wickets+ " tname ="+tname);
+	    	
+	    	//System.out.printf("|%10s|,%10s|,%10s|,%10s|",Eid,Ename,ECompname,Esalary,Eage,ELOcation );
+	    	//System.out.println( );
+	    	Player obj = new Player(jn,name,runs,wickets,tname);
+	    	allplayerlist.add(obj);
+	    }
+	    
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return allplayerlist;
+	    
+
+
+
+}
+	}
+
+
