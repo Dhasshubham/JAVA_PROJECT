@@ -1,0 +1,21 @@
+package com.tka.controller;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.tka.Player.Player;
+import com.tka.service.IPLService;
+
+//import com.tka.client.Player;
+
+public class IPLController {
+	IPLService service = null;
+
+	public List<Player> getAllPlayers() throws SQLException {
+		service = new IPLService();
+		System.out.println("we are in IPLController");
+		List<Player>allplayerList=service.getAllPlayers();
+		return allplayerList;
+	}
+
+}
