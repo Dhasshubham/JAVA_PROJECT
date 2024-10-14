@@ -1,0 +1,23 @@
+package com.tka.service;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+//import java.util.*;
+
+import com.tka.Player.Player;
+import com.tka.dao.IPLDao;
+
+public class IPLService {
+	IPLDao dao = null;
+	List<Player>allplayersList = new ArrayList<Player>();
+	public List<Player> getAllPlayers() throws SQLException {
+	System.out.println("we are in IPLService");
+	IPLDao dao= new IPLDao();
+	
+	allplayersList = dao.getAllPlayers();
+	return allplayersList;
+	
+
+}
+}
